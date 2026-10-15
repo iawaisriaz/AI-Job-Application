@@ -1,0 +1,791 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+New Job Analysis | Analyzing
+{% endblock %}
+
+{% block content %}
+
+{% include "navbar.html" %}
+
+<main
+    class="lg:ml-[245px]
+           min-h-screen
+           bg-white
+           pt-[64px]
+           lg:pt-0"
+>
+
+    {% include "header.html" %}
+
+    <div
+        class="px-4
+               sm:px-6
+               lg:px-8
+               py-6
+               sm:py-8"
+    >
+
+        <!-- =====================================
+             TITLE
+        ====================================== -->
+
+        <div class="mb-7">
+
+            <h2
+                class="text-2xl
+                       sm:text-3xl
+                       font-bold
+                       text-[#101936]"
+            >
+                New Job Analysis
+            </h2>
+
+            <p
+                class="mt-2
+                       text-sm
+                       sm:text-base
+                       text-slate-500"
+            >
+                Our AI is analyzing your CV against the job description.
+                This may take a few moments.
+            </p>
+
+        </div>
+
+
+        <!-- =====================================
+             STEPS
+        ====================================== -->
+
+        {% include "progress_steps.html" with current_step=3 %}
+
+
+        <!-- =====================================
+             ANALYSIS CARD
+        ====================================== -->
+
+        <div
+            class="max-w-4xl
+                   mx-auto
+                   bg-white
+                   border
+                   border-slate-200
+                   rounded-2xl
+                   shadow-sm
+                   px-5
+                   py-10
+                   sm:py-14"
+        >
+
+
+            <!-- =================================
+                 STATIC ANALYSIS ICON
+            ================================== -->
+
+            <div
+                class="flex
+                       justify-center
+                       mb-8"
+            >
+
+                <div
+                    class="relative
+                           w-36
+                           h-36
+                           rounded-full
+                           border-[10px]
+                           border-blue-100
+                           flex
+                           items-center
+                           justify-center"
+                >
+
+                    <div
+                        class="w-20
+                               h-20
+                               rounded-full
+                               bg-blue-100
+                               text-blue-600
+                               flex
+                               items-center
+                               justify-center"
+                    >
+
+
+                        <div
+                            class="absolute
+                                inset-[-10px]
+                                rounded-full
+                                border-[10px]
+                                border-transparent
+                                border-t-blue-500
+                                border-r-blue-500
+                                animate-spin"
+                        ></div>
+
+                        <!-- BRAIN ICON -->
+
+                        <img
+    src="{% static 'images/logo.png' %}"
+    alt="AI Job Application Assistant Logo"
+    class="w-20 h-20 object-contain"
+>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 TEXT
+            ================================== -->
+
+            <div class="text-center">
+
+                <h3
+                    id="analysis-title"
+                    class="text-2xl
+                           sm:text-3xl
+                           font-bold
+                           text-[#101936]"
+                >
+                    Analyzing...
+                </h3>
+
+                <p
+                    id="analysis-description"
+                    class="max-w-lg
+                           mx-auto
+                           mt-3
+                           text-sm
+                           sm:text-base
+                           text-slate-500"
+                >
+                    Our AI is preparing your CV and job information
+                    for analysis.
+                </p>
+
+            </div>
+
+
+            <!-- =================================
+                 PROGRESS BOX
+            ================================== -->
+
+            <div
+                class="max-w-lg
+                       mx-auto
+                       mt-8
+                       bg-blue-50/60
+                       border
+                       border-blue-100
+                       rounded-xl
+                       p-5"
+            >
+
+                <!-- STEP 1 -->
+
+                <div
+                    class="flex
+                           items-center
+                           gap-3
+                           mb-5"
+                >
+
+                    <div
+                        id="step-1"
+                        class="w-5
+                               h-5
+                               rounded-full
+                               bg-slate-200
+                               flex
+                               items-center
+                               justify-center"
+                    ></div>
+
+                    <span
+                        id="step-text-1"
+                        class="text-sm
+                               text-slate-600"
+                    >
+                        Parsing CV content
+                    </span>
+
+                </div>
+
+
+                <!-- STEP 2 -->
+
+                <div
+                    class="flex
+                           items-center
+                           gap-3
+                           mb-5"
+                >
+
+                    <div
+                        id="step-2"
+                        class="w-5
+                               h-5
+                               rounded-full
+                               bg-slate-200
+                               flex
+                               items-center
+                               justify-center"
+                    ></div>
+
+                    <span
+                        id="step-text-2"
+                        class="text-sm
+                               text-slate-400"
+                    >
+                        Analyzing job description
+                    </span>
+
+                </div>
+
+
+                <!-- STEP 3 -->
+
+                <div
+                    class="flex
+                           items-center
+                           gap-3
+                           mb-5"
+                >
+
+                    <div
+                        id="step-3"
+                        class="w-5
+                               h-5
+                               rounded-full
+                               bg-slate-200
+                               flex
+                               items-center
+                               justify-center"
+                    ></div>
+
+                    <span
+                        id="step-text-3"
+                        class="text-sm
+                               text-slate-400"
+                    >
+                        Matching skills and experience
+                    </span>
+
+                </div>
+
+
+                <!-- STEP 4 -->
+
+                <div
+                    class="flex
+                           items-center
+                           gap-3"
+                >
+
+                    <div
+                        id="step-4"
+                        class="w-5
+                               h-5
+                               rounded-full
+                               bg-slate-200
+                               flex
+                               items-center
+                               justify-center"
+                    ></div>
+
+                    <span
+                        id="step-text-4"
+                        class="text-sm
+                               text-slate-400"
+                    >
+                        Generating insights
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- ==========================================
+     JAVASCRIPT
+=========================================== -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        startAnalysis();
+
+    }
+);
+
+
+/* ==========================================
+   GET CSRF TOKEN
+=========================================== */
+
+function getCookie(name) {
+
+    let cookieValue = null;
+
+    if (
+        document.cookie &&
+        document.cookie !== ""
+    ) {
+
+        const cookies =
+            document.cookie.split(";");
+
+        for (
+            let cookie of cookies
+        ) {
+
+            cookie = cookie.trim();
+
+            if (
+                cookie.substring(
+                    0,
+                    name.length + 1
+                ) ===
+                (name + "=")
+            ) {
+
+                cookieValue =
+                    decodeURIComponent(
+                        cookie.substring(
+                            name.length + 1
+                        )
+                    );
+
+                break;
+            }
+        }
+    }
+
+    return cookieValue;
+}
+
+
+/* ==========================================
+   WAIT
+=========================================== */
+
+function wait(milliseconds) {
+
+    return new Promise(
+        function (resolve) {
+
+            setTimeout(
+                resolve,
+                milliseconds
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   COMPLETE STEP
+=========================================== */
+
+function completeStep(stepNumber) {
+
+    const step =
+        document.getElementById(
+            "step-" + stepNumber
+        );
+
+    const text =
+        document.getElementById(
+            "step-text-" + stepNumber
+        );
+
+
+    if (!step) {
+        return;
+    }
+
+
+    /* Green circle */
+
+    step.className =
+        "w-5 h-5 rounded-full " +
+        "bg-green-500 text-white " +
+        "flex items-center justify-center";
+
+
+    /* Check icon */
+
+    step.innerHTML = `
+        <svg
+            class="w-3 h-3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            viewBox="0 0 24 24"
+        >
+
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 12l4 4L19 7"
+            />
+
+        </svg>
+    `;
+
+
+    /* Text becomes active */
+
+    if (text) {
+
+        text.classList.remove(
+            "text-slate-400"
+        );
+
+        text.classList.add(
+            "text-slate-600"
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   UPDATE CURRENT TEXT
+=========================================== */
+
+function updateAnalysisText(
+    title,
+    description
+) {
+
+    const titleElement =
+        document.getElementById(
+            "analysis-title"
+        );
+
+    const descriptionElement =
+        document.getElementById(
+            "analysis-description"
+        );
+
+
+    if (titleElement) {
+
+        titleElement.textContent =
+            title;
+
+    }
+
+
+    if (descriptionElement) {
+
+        descriptionElement.textContent =
+            description;
+
+    }
+
+}
+
+
+/* ==========================================
+   MAIN ANALYSIS FLOW
+=========================================== */
+
+async function startAnalysis() {
+
+    try {
+
+        /*
+         * STEP 1
+         */
+
+        updateAnalysisText(
+            "Analyzing...",
+            "Parsing your CV content and preparing the information."
+        );
+
+        await wait(1000);
+
+        completeStep(1);
+
+
+        /*
+         * STEP 2
+         */
+
+        updateAnalysisText(
+            "Analyzing...",
+            "Analyzing the job description and identifying requirements."
+        );
+
+        await wait(1000);
+
+        completeStep(2);
+
+
+        /*
+         * STEP 3
+         */
+
+        updateAnalysisText(
+            "Analyzing...",
+            "Matching your skills and experience with the job requirements."
+        );
+
+        await wait(1000);
+
+        completeStep(3);
+
+
+        /*
+         * STEP 4
+         */
+
+        updateAnalysisText(
+            "Analyzing...",
+            "Generating your personalized analysis and insights."
+        );
+
+        await wait(1000);
+
+        completeStep(4);
+
+
+        /*
+         * ALL VISUAL STEPS COMPLETE
+         */
+
+        updateAnalysisText(
+            "Analysis Complete",
+            "Your CV analysis is ready. Opening your results..."
+        );
+
+
+        /*
+         * Small pause before redirect
+         */
+
+        await wait(700);
+
+
+        /*
+         * NOW CALL ACTUAL AI ANALYSIS
+         *
+         * This request is sent ONLY ONCE.
+         */
+
+        const csrftoken =
+            getCookie("csrftoken");
+
+
+        const response =
+            await fetch(
+                "{% url 'run_analysis' analysis.id %}",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "X-CSRFToken":
+                            csrftoken,
+
+                        "Content-Type":
+                            "application/json",
+
+                        "X-Requested-With":
+                            "XMLHttpRequest"
+
+                    },
+
+                    credentials:
+                        "same-origin"
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        /*
+         * SUCCESS
+         */
+
+        if (
+            data.success
+        ) {
+
+            window.location.href =
+                data.redirect_url;
+
+            return;
+
+        }
+
+
+        /*
+         * ERROR FROM SERVER
+         */
+
+        showError(
+            data.error ||
+            "Analysis failed."
+        );
+
+
+    }
+    catch (error) {
+
+        console.error(
+            "Analysis error:",
+            error
+        );
+
+
+        showError(
+            "Something went wrong while analyzing your CV."
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   SHOW ERROR
+=========================================== */
+
+function showError(message) {
+
+    updateAnalysisText(
+        "Analysis Failed",
+        "We were unable to complete your CV analysis."
+    );
+
+
+    const container =
+        document.querySelector(
+            ".max-w-lg.mx-auto.mt-8"
+        );
+
+
+    if (container) {
+
+        container.innerHTML = `
+
+            <div class="text-center">
+
+                <div
+                    class="w-12
+                           h-12
+                           mx-auto
+                           rounded-full
+                           bg-red-100
+                           text-red-500
+                           flex
+                           items-center
+                           justify-center
+                           mb-3"
+                >
+
+                    <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6 6l12 12M6 18L18 6"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <div
+                    class="text-red-500
+                           font-semibold
+                           mb-2"
+                >
+                    Analysis Failed
+                </div>
+
+
+                <p
+                    class="text-sm
+                           text-slate-500"
+                >
+                    ${escapeHtml(message)}
+                </p>
+
+
+                <button
+                    onclick="window.history.back()"
+                    class="mt-4
+                           px-4
+                           py-2
+                           rounded-lg
+                           bg-blue-600
+                           text-white
+                           text-sm
+                           font-semibold"
+                >
+                    Go Back
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ==========================================
+   ESCAPE HTML
+=========================================== */
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+
+}
+
+</script>
+
+{% endblock %}

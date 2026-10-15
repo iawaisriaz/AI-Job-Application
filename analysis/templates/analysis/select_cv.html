@@ -1,0 +1,443 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+New Job Analysis | Select CV
+{% endblock %}
+
+
+{% block content %}
+
+
+{% include "navbar.html" %}
+
+
+<main
+    class="lg:ml-[245px]
+           min-h-screen
+           bg-white
+           pt-[64px]
+           lg:pt-0"
+>
+
+
+    {% include "header.html" %}
+
+
+    <div
+        class="px-4
+               sm:px-6
+               lg:px-8
+               py-6
+               sm:py-8"
+    >
+
+
+        <!-- =====================================
+             PAGE TITLE
+        ====================================== -->
+
+        <div class="mb-7">
+
+            <h2
+                class="text-2xl
+                       sm:text-3xl
+                       font-bold
+                       text-[#101936]"
+            >
+                New Job Analysis
+            </h2>
+
+
+            <p
+                class="mt-2
+                       text-sm
+                       sm:text-base
+                       text-slate-500"
+            >
+                Select the CV you want to analyze with the job description.
+            </p>
+
+        </div>
+
+
+
+        <!-- =====================================
+             STEPS
+        ====================================== -->
+
+        {% include "progress_steps.html" with current_step=2 %}
+
+
+        <!-- =====================================
+             CV SECTION
+        ====================================== -->
+
+        <div
+            class="bg-white
+                   border
+                   border-slate-200
+                   rounded-2xl
+                   shadow-sm
+                   max-w-8xl"
+        >
+
+            <div class="p-5 sm:p-7">
+
+
+                <!-- HEADER -->
+
+                <div
+                    class="flex
+                           items-center
+                           justify-between
+                           mb-5"
+                >
+
+                    <h3
+                        class="text-lg
+                               sm:text-xl
+                               font-bold
+                               text-[#101936]"
+                    >
+                        Your CVs
+                    </h3>
+
+
+                    <a
+                        href="{% url 'cv' %}"
+                        class="inline-flex
+                               items-center
+                               justify-center
+                               px-4
+                               py-2
+                               rounded-lg
+                               border
+                               border-blue-500
+                               text-blue-600
+                               text-sm
+                               font-semibold
+                               hover:bg-blue-50
+                               transition"
+                    >
+                        Upload CV
+                    </a>
+
+                </div>
+
+
+
+                <!-- MESSAGES -->
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div
+                            class="mb-4
+                                   px-4
+                                   py-3
+                                   rounded-xl
+                                   bg-red-50
+                                   border
+                                   border-red-200
+                                   text-red-700
+                                   text-sm"
+                        >
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+
+                <!-- CV FORM -->
+
+                <form
+    method="POST"
+    action="{% url 'select_cv' analysis.id %}"
+>
+
+                    {% csrf_token %}
+
+
+                    {% if cvs %}
+
+                        <div class="space-y-3">
+
+
+                            {% for cv in cvs %}
+
+
+                                <label
+                                    class="flex
+                                           items-center
+                                           gap-4
+                                           p-4
+                                           rounded-xl
+                                           border
+                                           border-slate-200
+                                           cursor-pointer
+                                           hover:border-blue-400
+                                           hover:bg-blue-50/30
+                                           transition"
+                                >
+
+
+                                    <!-- RADIO -->
+
+                                    <input
+                                        type="radio"
+                                        name="cv_id"
+                                        value="{{ cv.id }}"
+                                        required
+                                        class="w-4 h-4
+                                               text-blue-600
+                                               focus:ring-blue-500"
+                                        {% if forloop.first %}
+                                            checked
+                                        {% endif %}
+                                    >
+
+
+
+                                    <!-- FILE ICON -->
+
+                                    <div
+                                        class="w-12
+                                               h-12
+                                               rounded-xl
+                                               bg-red-50
+                                               text-red-500
+                                               flex
+                                               items-center
+                                               justify-center
+                                               shrink-0"
+                                    >
+
+                                        <svg
+                                            class="w-6 h-6"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            viewBox="0 0 24 24"
+                                        >
+
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"
+                                            />
+
+                                            <polyline
+                                                points="14 2 14 8 20 8"
+                                            />
+
+                                        </svg>
+
+                                    </div>
+
+
+
+                                    <!-- CV INFO -->
+
+                                    <div class="min-w-0 flex-1">
+
+                                        <h4
+                                            class="text-sm
+                                                   sm:text-base
+                                                   font-semibold
+                                                   text-[#101936]
+                                                   truncate"
+                                        >
+                                            {{ cv.name }}
+                                        </h4>
+
+
+                                        <p
+                                            class="text-xs
+                                                   text-slate-500
+                                                   mt-1"
+                                        >
+                                            {{ cv.file_extension }}
+
+                                            {% if cv.file_size %}
+                                                • {{ cv.file_size }}
+                                            {% endif %}
+                                        </p>
+
+                                    </div>
+
+
+
+                                    <!-- DATE -->
+
+                                    <div
+                                        class="hidden
+                                               sm:block
+                                               text-xs
+                                               text-slate-400
+                                               shrink-0"
+                                    >
+                                        Uploaded on
+                                        {{ cv.uploaded_at|date:"d M Y" }}
+                                    </div>
+
+
+                                    <!-- THREE DOTS -->
+
+                                    <div
+                                        class="text-slate-400
+                                               text-xl
+                                               shrink-0"
+                                    >
+                                        ⋮
+                                    </div>
+
+                                </label>
+
+
+                            {% endfor %}
+
+                        </div>
+
+
+                    {% else %}
+
+
+                        <!-- NO CV -->
+
+                        <div
+                            class="text-center
+                                   py-10
+                                   bg-slate-50
+                                   rounded-xl"
+                        >
+
+                            <h4
+                                class="font-semibold
+                                       text-[#101936]"
+                            >
+                                No CVs found
+                            </h4>
+
+                            <p
+                                class="text-sm
+                                       text-slate-500
+                                       mt-2
+                                       mb-5"
+                            >
+                                Upload a CV before starting the analysis.
+                            </p>
+
+                        </div>
+
+
+                    {% endif %}
+
+
+
+                    <!-- =================================
+                         BUTTONS
+                    ================================== -->
+
+                    <div
+                        class="flex
+                               items-center
+                               justify-between
+                               gap-4
+                               mt-7"
+                    >
+
+
+                        <!-- BACK -->
+
+                        <a
+                            href="{% url 'new_analysis' %}"
+                            class="inline-flex
+                                   items-center
+                                   gap-2
+                                   px-5
+                                   py-3
+                                   rounded-lg
+                                   border
+                                   border-slate-300
+                                   text-slate-600
+                                   text-sm
+                                   font-semibold
+                                   hover:bg-slate-50
+                                   transition"
+                        >
+
+                            ← Back
+
+                        </a>
+
+
+
+                        <!-- NEXT -->
+
+                        {% if cvs %}
+
+                            <button
+                                type="submit"
+                                class="inline-flex
+                                       items-center
+                                       gap-2
+                                       px-5
+                                       py-3
+                                       rounded-lg
+                                       bg-blue-600
+                                       text-white
+                                       text-sm
+                                       font-semibold
+                                       hover:bg-blue-700
+                                       transition
+                                       shadow-sm"
+                            >
+
+                                Next: Analyze
+
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    viewBox="0 0 24 24"
+                                >
+
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M5 12h14"
+                                    />
+
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M13 6l6 6-6 6"
+                                    />
+
+                                </svg>
+
+                            </button>
+
+                        {% endif %}
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+{% endblock %}

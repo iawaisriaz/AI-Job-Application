@@ -1,0 +1,192 @@
+<!-- ==========================================
+     RESPONSIVE PROGRESS STEPS
+     AI JOB APPLICATION ASSISTANT
+========================================== -->
+
+<div class="w-full bg-white border border-slate-200
+            rounded-2xl shadow-sm
+            px-3 py-4 sm:px-6 sm:py-5 mb-6">
+
+    <div class="flex items-start justify-between
+                w-full max-w-4xl mx-auto">
+
+        <!-- STEP 1: JOB DETAILS -->
+        <div class="flex flex-col items-center
+                    sm:flex-row sm:items-center
+                    gap-1.5 sm:gap-2 shrink-0">
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9
+                        rounded-full flex items-center
+                        justify-center text-sm font-semibold
+                        shrink-0
+                        {% if current_step == 1 %}
+                            bg-blue-600 text-white
+                        {% elif current_step > 1 %}
+                            bg-green-500 text-white
+                        {% else %}
+                            bg-white border border-slate-300 text-slate-500
+                        {% endif %}">
+
+                {% if current_step > 1 %}
+                    &#10003;
+                {% else %}
+                    1
+                {% endif %}
+            </div>
+
+            <span class="text-[10px] sm:text-sm
+                         text-center whitespace-nowrap
+                         {% if current_step == 1 %}
+                             text-blue-600 font-semibold
+                         {% elif current_step > 1 %}
+                             text-green-600 font-medium
+                         {% else %}
+                             text-slate-500
+                         {% endif %}">
+                Job Details
+            </span>
+        </div>
+
+        <!-- CONNECTOR 1 -->
+        <div class="flex-1 h-px mt-4 sm:mt-[18px]
+                    mx-1.5 sm:mx-4
+                    {% if current_step > 1 %}
+                        bg-green-400
+                    {% else %}
+                        bg-slate-200
+                    {% endif %}">
+        </div>
+
+        <!-- STEP 2: SELECT CV -->
+        <div class="flex flex-col items-center
+                    sm:flex-row sm:items-center
+                    gap-1.5 sm:gap-2 shrink-0">
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9
+                        rounded-full flex items-center
+                        justify-center text-sm font-semibold
+                        shrink-0
+                        {% if current_step == 2 %}
+                            bg-blue-600 text-white
+                        {% elif current_step > 2 %}
+                            bg-green-500 text-white
+                        {% else %}
+                            bg-white border border-slate-300 text-slate-500
+                        {% endif %}">
+
+                {% if current_step > 2 %}
+                    &#10003;
+                {% else %}
+                    2
+                {% endif %}
+            </div>
+
+            <span class="text-[10px] sm:text-sm
+                         text-center whitespace-nowrap
+                         {% if current_step == 2 %}
+                             text-blue-600 font-semibold
+                         {% elif current_step > 2 %}
+                             text-green-600 font-medium
+                         {% else %}
+                             text-slate-500
+                         {% endif %}">
+                Select CV
+            </span>
+        </div>
+
+        <!-- CONNECTOR 2 -->
+        <div class="flex-1 h-px mt-4 sm:mt-[18px]
+                    mx-1.5 sm:mx-4
+                    {% if current_step > 2 %}
+                        bg-green-400
+                    {% else %}
+                        bg-slate-200
+                    {% endif %}">
+        </div>
+
+        <!-- STEP 3: ANALYSIS -->
+        <div class="flex flex-col items-center
+                    sm:flex-row sm:items-center
+                    gap-1.5 sm:gap-2 shrink-0">
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9
+                        rounded-full flex items-center
+                        justify-center text-sm font-semibold
+                        shrink-0
+                        {% if current_step == 3 %}
+                            bg-blue-600 text-white
+                        {% elif current_step > 3 %}
+                            bg-green-500 text-white
+                        {% else %}
+                            bg-white border border-slate-300 text-slate-500
+                        {% endif %}">
+
+                {% if current_step > 3 %}
+                    &#10003;
+                {% else %}
+                    3
+                {% endif %}
+            </div>
+
+            <span class="text-[10px] sm:text-sm
+                         text-center whitespace-nowrap
+                         {% if current_step == 3 %}
+                             text-blue-600 font-semibold
+                         {% elif current_step > 3 %}
+                             text-green-600 font-medium
+                         {% else %}
+                             text-slate-500
+                         {% endif %}">
+                Analysis
+            </span>
+        </div>
+
+        <!-- CONNECTOR 3 -->
+        <div class="flex-1 h-px mt-4 sm:mt-[18px]
+                    mx-1.5 sm:mx-4
+                    {% if current_step > 3 %}
+                        bg-green-400
+                    {% else %}
+                        bg-slate-200
+                    {% endif %}">
+        </div>
+
+        <!-- STEP 4: RESULTS -->
+        <div class="flex flex-col items-center
+                    sm:flex-row sm:items-center
+                    gap-1.5 sm:gap-2 shrink-0">
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9
+                        rounded-full flex items-center
+                        justify-center text-sm font-semibold
+                        shrink-0
+                        {% if current_step == 4 %}
+                            bg-blue-600 text-white
+                        {% elif current_step > 4 %}
+                            bg-green-500 text-white
+                        {% else %}
+                            bg-white border border-slate-300 text-slate-500
+                        {% endif %}">
+
+                {% if current_step > 4 %}
+                    &#10003;
+                {% else %}
+                    4
+                {% endif %}
+            </div>
+
+            <span class="text-[10px] sm:text-sm
+                         text-center whitespace-nowrap
+                         {% if current_step == 4 %}
+                             text-blue-600 font-semibold
+                         {% elif current_step > 4 %}
+                             text-green-600 font-medium
+                         {% else %}
+                             text-slate-500
+                         {% endif %}">
+                Results
+            </span>
+        </div>
+
+    </div>
+</div>

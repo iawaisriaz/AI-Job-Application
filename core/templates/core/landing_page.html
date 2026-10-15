@@ -1,0 +1,1198 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    AI Job Application Assistant
+{% endblock %}
+
+{% block content %}
+
+<!-- ======  NAVBAR  ====== -->
+<header class="bg-[#071A3A] border-b border-blue-900/60 sticky top-0 z-50">
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+
+        <div class="h-16 sm:h-[72px] flex items-center justify-between">
+
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+
+               <div class="w-10 h-10 flex items-center justify-center overflow-hidden">
+                    <img src="{% static 'images/light-logo.png' %}"
+                    alt="AI Job Application Assistant Logo"
+                    class="w-full h-full object-contain scale-[1.4]">
+                </div>
+
+                <span class="text-lg sm:text-xl font-bold text-white">
+                    <span class="text-blue-400">AI</span>
+                    Job Application Assistant
+                </span>
+
+            </a>
+
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-8">
+
+                <a href="#home"
+                   class="text-sm text-slate-200 hover:text-white transition">
+                    Home
+                </a>
+
+                <a href="#features"
+                   class="text-sm text-slate-200 hover:text-white transition">
+                    Features
+                </a>
+
+                <a href="#how-it-works"
+                   class="text-sm text-slate-200 hover:text-white transition">
+                    How It Works
+                </a>
+
+                <a href="#about"
+                   class="text-sm text-slate-200 hover:text-white transition">
+                    About
+                </a>
+
+            </nav>
+
+
+            <!-- Auth Buttons -->
+            <div class="hidden sm:flex items-center gap-3">
+
+                <a href="{% url 'login' %}"
+                   class="px-5 py-2.5 rounded-lg border border-white/80 text-white text-sm font-medium hover:bg-white hover:text-[#071A3A] transition">
+                    Login
+                </a>
+
+                <a href="{% url 'signup' %}"
+                   class="px-5 py-2.5 rounded-lg bg-gradient-to-r from-blue-500 to-violet-500 text-white text-sm font-semibold hover:opacity-90 transition shadow-lg shadow-blue-500/20">
+                    Sign Up
+                </a>
+
+            </div>
+
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button"
+                    class="lg:hidden text-white"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-expanded="false">
+
+                <svg class="w-7 h-7"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+            
+        </div>
+    </div>
+
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden border-t border-blue-900/60 bg-[#071A3A]">
+
+            <nav class="px-5 py-5 space-y-2">
+
+                <a href="#home"
+                class="block px-4 py-3 rounded-lg text-slate-200 hover:bg-white/10 hover:text-white transition">
+                    Home
+                </a>
+
+                <a href="#features"
+                class="block px-4 py-3 rounded-lg text-slate-200 hover:bg-white/10 hover:text-white transition">
+                    Features
+                </a>
+
+                <a href="#how-it-works"
+                class="block px-4 py-3 rounded-lg text-slate-200 hover:bg-white/10 hover:text-white transition">
+                    How It Works
+                </a>
+
+                <a href="#about"
+                class="block px-4 py-3 rounded-lg text-slate-200 hover:bg-white/10 hover:text-white transition">
+                    About
+                </a>
+
+                <div class="pt-3 border-t border-white/10 space-y-2">
+
+                    <a href="#"
+                    class="block text-center px-4 py-3 rounded-lg border border-white/80 text-white font-medium hover:bg-white hover:text-[#071A3A] transition">
+                        Login
+                    </a>
+
+                    <a href="#"
+                    class="block text-center px-4 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold hover:opacity-90 transition">
+                        Sign Up
+                    </a>
+
+                </div>
+
+            </nav>
+        </div>
+
+</header>
+
+
+
+<!-- ======  HERO SECTION  ====== -->
+<section id="home"
+         class="relative overflow-hidden bg-[#071A3A]">
+
+    <!-- Background glow -->
+    <div class="absolute -right-32 top-10 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl"></div>
+
+    <div class="absolute left-1/3 bottom-0 w-[400px] h-[300px] bg-violet-600/10 rounded-full blur-3xl"></div>
+
+
+    <div class="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+
+        <div class="min-h-[620px] lg:min-h-[600px]
+                    grid lg:grid-cols-2
+                    gap-10 lg:gap-4
+                    items-center">
+
+            <!-- LEFT -->
+            <div class="py-16 lg:py-20">
+
+                <!-- Badge -->
+                <div class="inline-flex items-center
+                            px-4 py-2
+                            rounded-full
+                            bg-blue-500/15
+                            border border-blue-400/20
+                            text-blue-200
+                            text-xs sm:text-sm
+                            font-medium
+                            mb-6">
+
+                    <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+
+                    Your AI-Powered Job Application Assistant
+
+                </div>
+
+
+                <!-- Heading -->
+                <h1 class="text-4xl sm:text-5xl lg:text-[54px]
+                           leading-[1.08]
+                           font-bold
+                           text-white
+                           tracking-tight">
+
+                    Get Hired Faster with
+
+                    <span class="block mt-2
+                                 bg-gradient-to-r
+                                 from-blue-400
+                                 via-blue-500
+                                 to-violet-500
+                                 bg-clip-text
+                                 text-transparent">
+
+                        AI Job Application Assistant
+
+                    </span>
+
+                </h1>
+
+
+                <!-- Description -->
+                <p class="mt-6 max-w-xl
+                          text-base sm:text-lg
+                          leading-7
+                          text-slate-300">
+
+                    Analyze your CV, understand the job requirements,
+                    and create tailored applications — all with the
+                    power of AI.
+
+                </p>
+
+
+                <!-- Buttons -->
+                <div class="mt-8 flex flex-col sm:flex-row gap-4">
+
+                    <a href="{% url 'signup' %}"
+                       class="inline-flex items-center justify-center
+                              px-7 py-3.5
+                              rounded-lg
+                              bg-gradient-to-r
+                              from-blue-500
+                              to-violet-500
+                              text-white
+                              font-semibold
+                              shadow-xl shadow-blue-600/20
+                              hover:scale-[1.02]
+                              transition">
+
+                        Get Started Free
+
+                        <svg class="w-5 h-5 ml-2"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+
+                        </svg>
+
+                    </a>
+
+
+                    <a href="#how-it-works"
+                       class="inline-flex items-center justify-center
+                              px-7 py-3.5
+                              rounded-lg
+                              border border-white/70
+                              text-white
+                              font-semibold
+                              hover:bg-white
+                              hover:text-[#071A3A]
+                              transition">
+
+                        Learn More
+
+                    </a>
+
+                </div>
+
+
+                <!-- Small Benefits -->
+                <div class="mt-8 flex flex-wrap gap-x-7 gap-y-3">
+
+                    <div class="flex items-center gap-2 text-sm text-slate-300">
+
+                        <svg class="w-4 h-4 text-blue-400"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M5 13l4 4L19 7"/>
+
+                        </svg>
+
+                        AI-Powered
+
+                    </div>
+
+
+                    <div class="flex items-center gap-2 text-sm text-slate-300">
+
+                        <svg class="w-4 h-4 text-blue-400"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+
+                            <circle cx="12"
+                                    cy="12"
+                                    r="9"
+                                    stroke-width="2"/>
+
+                            <path stroke-linecap="round"
+                                  stroke-width="2"
+                                  d="M12 7v5l3 2"/>
+
+                        </svg>
+
+                        Save Time
+
+                    </div>
+
+
+                    <div class="flex items-center gap-2 text-sm text-slate-300">
+
+                        <svg class="w-4 h-4 text-blue-400"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+
+                            <circle cx="12"
+                                    cy="12"
+                                    r="9"
+                                    stroke-width="2"/>
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M8 12l2.5 2.5L16 9"/>
+
+                        </svg>
+
+                        Higher Success Rate
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT HERO IMAGE -->
+            <div class="relative flex justify-center lg:justify-end">
+
+                <div class="absolute
+                            w-[380px] h-[380px]
+                            sm:w-[480px] sm:h-[480px]
+                            bg-blue-600/20
+                            rounded-full
+                            blur-3xl">
+                </div>
+
+
+                <img src="{% static 'images/hero-illustration.png' %}"
+                     alt="AI Job Application Assistant"
+                     class="relative z-10
+                            w-full
+                            max-w-[620px]
+                            object-contain
+                            drop-shadow-2xl">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======  FEATURES  ====== -->
+<section id="features"
+         class="bg-white py-20 lg:py-24">
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+
+
+        <!-- Section Heading -->
+        <div class="text-center max-w-2xl mx-auto">
+
+            <p class="text-sm font-bold
+                      tracking-widest
+                      text-blue-600 uppercase">
+
+                Key Features
+
+            </p>
+
+            <h2 class="mt-3 text-3xl sm:text-4xl
+                       font-bold text-[#102653]">
+
+                Everything You Need to Succeed
+
+            </h2>
+
+            <p class="mt-4 text-slate-500">
+
+                Our AI assistant helps you at every step
+                of your job application journey.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- Feature Grid -->
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
+
+
+            <!-- Feature 1 -->
+            <div class="text-center group">
+
+                <div class="mx-auto w-14 h-14
+                            rounded-2xl
+                            bg-violet-50
+                            flex items-center justify-center
+                            group-hover:scale-110
+                            transition">
+
+                    <svg class="w-7 h-7 text-violet-500"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M7 3h8l4 4v14H7V3z"/>
+
+                        <path stroke-linecap="round"
+                              stroke-width="2"
+                              d="M10 9h6M10 13h6M10 17h3"/>
+
+                    </svg>
+
+                </div>
+
+                <h3 class="mt-5 font-bold text-[#102653]">
+                    Analyze Your CV
+                </h3>
+
+                <p class="mt-2 text-sm leading-6 text-slate-500">
+                    Get detailed feedback and improvement
+                    suggestions for your resume.
+                </p>
+
+            </div>
+
+
+
+            <!-- Feature 2 -->
+            <div class="text-center group">
+
+                <div class="mx-auto w-14 h-14
+                            rounded-2xl
+                            bg-blue-50
+                            flex items-center justify-center
+                            group-hover:scale-110
+                            transition">
+
+                    <svg class="w-7 h-7 text-blue-500"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24">
+
+                        <circle cx="11"
+                                cy="11"
+                                r="6"
+                                stroke-width="2"/>
+
+                        <path stroke-linecap="round"
+                              stroke-width="2"
+                              d="M16 16l4 4"/>
+
+                    </svg>
+
+                </div>
+
+                <h3 class="mt-5 font-bold text-[#102653]">
+                    Match Job Descriptions
+                </h3>
+
+                <p class="mt-2 text-sm leading-6 text-slate-500">
+                    Find the best matches for your skills
+                    and experience.
+                </p>
+
+            </div>
+
+
+
+            <!-- Feature 3 -->
+            <div class="text-center group">
+
+                <div class="mx-auto w-14 h-14
+                            rounded-2xl
+                            bg-emerald-50
+                            flex items-center justify-center
+                            group-hover:scale-110
+                            transition">
+
+                    <svg class="w-7 h-7 text-emerald-500"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M4 20h16"/>
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M6 17l3-3 3 2 6-7"/>
+
+                    </svg>
+
+                </div>
+
+                <h3 class="mt-5 font-bold text-[#102653]">
+                    Create Tailored Applications
+                </h3>
+
+                <p class="mt-2 text-sm leading-6 text-slate-500">
+                    Generate personalized cover letters
+                    and application content with AI.
+                </p>
+
+            </div>
+
+
+
+            <!-- Feature 4 -->
+            <div class="text-center group">
+
+                <div class="mx-auto w-14 h-14
+                            rounded-2xl
+                            bg-orange-50
+                            flex items-center justify-center
+                            group-hover:scale-110
+                            transition">
+
+                    <svg class="w-7 h-7 text-orange-500"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M4 19V9M10 19V5M16 19v-8M22 19V3"/>
+
+                    </svg>
+
+                </div>
+
+                <h3 class="mt-5 font-bold text-[#102653]">
+                    Track Your Progress
+                </h3>
+
+                <p class="mt-2 text-sm leading-6 text-slate-500">
+                    Keep an eye on your applications and
+                    interview status in one place.
+                </p>
+
+            </div>
+
+
+
+            <!-- Feature 5 -->
+            <div class="text-center group">
+
+                <div class="mx-auto w-14 h-14
+                            rounded-2xl
+                            bg-violet-50
+                            flex items-center justify-center
+                            group-hover:scale-110
+                            transition">
+
+                    <svg class="w-7 h-7 text-violet-500"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 3l2.8 5.7L21 9.6l-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3z"/>
+
+                    </svg>
+
+                </div>
+
+                <h3 class="mt-5 font-bold text-[#102653]">
+                    Improve & Apply
+                </h3>
+
+                <p class="mt-2 text-sm leading-6 text-slate-500">
+                    Get recommendations to boost your
+                    chances of getting hired.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======  HOW IT WORKS  ====== -->
+<section id="how-it-works"
+         class="bg-[#F2F8FF] py-20 lg:py-24">
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+
+            <!-- LEFT -->
+            <div>
+
+                <p class="text-sm font-bold
+                          tracking-widest
+                          text-blue-600 uppercase">
+
+                    How It Works
+
+                </p>
+
+                <h2 class="mt-3 text-3xl sm:text-4xl
+                           font-bold text-[#102653]
+                           leading-tight">
+
+                    Simple Steps to Your
+                    <span class="block">
+                        Dream Job
+                    </span>
+
+                </h2>
+
+                <p class="mt-5 text-slate-500 max-w-lg">
+
+                    Our platform makes the job application
+                    process easy, smart and efficient.
+
+                </p>
+
+
+
+                <!-- Step 1 -->
+                <div class="mt-8 flex gap-5">
+
+                    <div class="shrink-0 w-10 h-10
+                                rounded-full
+                                bg-gradient-to-br
+                                from-blue-500 to-violet-500
+                                text-white
+                                flex items-center justify-center
+                                font-bold">
+
+                        1
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-bold text-[#102653]">
+                            Upload Your CV
+                        </h3>
+
+                        <p class="mt-1 text-sm text-slate-500">
+                            Add your resume and let our AI
+                            analyze your skills.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Step 2 -->
+                <div class="mt-6 flex gap-5">
+
+                    <div class="shrink-0 w-10 h-10
+                                rounded-full
+                                bg-gradient-to-br
+                                from-blue-500 to-violet-500
+                                text-white
+                                flex items-center justify-center
+                                font-bold">
+
+                        2
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-bold text-[#102653]">
+                            Find Matching Jobs
+                        </h3>
+
+                        <p class="mt-1 text-sm text-slate-500">
+                            Discover the best job opportunities
+                            for you.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Step 3 -->
+                <div class="mt-6 flex gap-5">
+
+                    <div class="shrink-0 w-10 h-10
+                                rounded-full
+                                bg-gradient-to-br
+                                from-blue-500 to-violet-500
+                                text-white
+                                flex items-center justify-center
+                                font-bold">
+
+                        3
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-bold text-[#102653]">
+                            Create & Apply
+                        </h3>
+
+                        <p class="mt-1 text-sm text-slate-500">
+                            Generate tailored applications
+                            and submit with confidence.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+            <div class="relative flex justify-center">
+
+                <div class="absolute
+                            w-80 h-80
+                            bg-blue-100
+                            rounded-full
+                            blur-2xl
+                            opacity-70">
+                </div>
+
+                <img src="{% static 'images/fake-dashboard.png' %}"
+                     alt="Career Growth"
+                     class="relative z-10
+                            max-w-xl
+                            w-full
+                            object-contain">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======  WHY CHOOSE US  ====== -->
+<section id="about"
+         class="bg-white py-20 lg:py-24">
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+
+            <!-- LEFT -->
+            <div>
+
+                <p class="text-sm font-bold
+                          tracking-widest
+                          text-blue-600 uppercase">
+
+                    Why Choose Us
+
+                </p>
+
+                <h2 class="mt-3 text-3xl sm:text-4xl
+                           font-bold text-[#102653]">
+
+                    Built for Your Career Growth
+
+                </h2>
+
+                <p class="mt-5 text-slate-500 max-w-lg">
+
+                    We combine the power of AI with simple
+                    tools to help you land your dream job,
+                    faster.
+
+                </p>
+
+
+                <div class="mt-9 grid sm:grid-cols-2 gap-7">
+
+
+                    <div>
+
+                        <div class="w-11 h-11 rounded-xl
+                                    bg-blue-50
+                                    flex items-center justify-center">
+
+                            <svg class="w-5 h-5 text-blue-500"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+
+                            </svg>
+
+                        </div>
+
+                        <h3 class="mt-3 font-bold text-[#102653]">
+                            Save Time
+                        </h3>
+
+                        <p class="mt-1 text-sm text-slate-500">
+                            Automate the tedious parts of
+                            job applications.
+                        </p>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <div class="w-11 h-11 rounded-xl
+                                    bg-blue-50
+                                    flex items-center justify-center">
+
+                            <svg class="w-5 h-5 text-blue-500"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24">
+
+                                <circle cx="12"
+                                        cy="12"
+                                        r="9"
+                                        stroke-width="2"/>
+
+                                <path stroke-linecap="round"
+                                      stroke-width="2"
+                                      d="M8 12l2.5 2.5L16 9"/>
+
+                            </svg>
+
+                        </div>
+
+                        <h3 class="mt-3 font-bold text-[#102653]">
+                            Better Matches
+                        </h3>
+
+                        <p class="mt-1 text-sm text-slate-500">
+                            Get jobs that fit your skills
+                            and experience.
+                        </p>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <div class="w-11 h-11 rounded-xl
+                                    bg-blue-50
+                                    flex items-center justify-center">
+
+                            <svg class="w-5 h-5 text-blue-500"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1M12 12a4 4 0 100-8 4 4 0 000 8z"/>
+
+                            </svg>
+
+                        </div>
+
+                        <h3 class="mt-3 font-bold text-[#102653]">
+                            More Interviews
+                        </h3>
+
+                        <p class="mt-1 text-sm text-slate-500">
+                            Stand out with AI-optimized
+                            applications.
+                        </p>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <div class="w-11 h-11 rounded-xl
+                                    bg-emerald-50
+                                    flex items-center justify-center">
+
+                            <svg class="w-5 h-5 text-emerald-500"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M4 16l4-4 4 3 8-9"/>
+
+                            </svg>
+
+                        </div>
+
+                        <h3 class="mt-3 font-bold text-[#102653]">
+                            Career Growth
+                        </h3>
+
+                        <p class="mt-1 text-sm text-slate-500">
+                            Take the next step towards
+                            your goals.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+            <div class="relative flex justify-center">
+
+                <div class="absolute
+                            w-80 h-80
+                            bg-blue-100
+                            rounded-full
+                            blur-2xl
+                            opacity-70">
+                </div>
+
+                <img src="{% static 'images/career-growth.png' %}"
+                     alt="Career Growth"
+                     class="relative z-10
+                            max-w-md
+                            w-full
+                            object-contain">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======  CTA ====== -->
+<section id="pricing"
+         class="relative overflow-hidden
+                bg-gradient-to-r
+                from-blue-600
+                via-blue-600
+                to-violet-600">
+
+    <div class="absolute inset-0
+                bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_40%)]">
+    </div>
+
+
+    <div class="relative max-w-4xl mx-auto
+                px-5 sm:px-6
+                py-16 sm:py-20
+                text-center">
+
+        <p class="text-xs sm:text-sm
+                  font-semibold
+                  tracking-widest
+                  uppercase
+                  text-blue-100">
+
+            Ready to Get Started?
+
+        </p>
+
+        <h2 class="mt-3
+                   text-3xl sm:text-4xl
+                   font-bold
+                   text-white">
+
+            Let AI Work for Your Career
+
+        </h2>
+
+        <p class="mt-4 text-blue-100">
+
+            Join thousands of job seekers who are already
+            using AI to get hired.
+
+        </p>
+
+
+        <div class="mt-7 flex flex-col sm:flex-row
+                    justify-center gap-3">
+
+            <a href="{% url 'signup' %}"
+               class="px-7 py-3
+                      rounded-lg
+                      bg-white
+                      text-[#1741A8]
+                      font-bold
+                      hover:bg-slate-100
+                      transition">
+
+                Sign Up Free →
+
+            </a>
+
+            <a href="#how-it-works"
+               class="px-7 py-3
+                      rounded-lg
+                      border border-white/70
+                      text-white
+                      font-semibold
+                      hover:bg-white/10
+                      transition">
+
+                Learn More
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======  FOOTER  ====== -->
+<footer class="bg-[#071A3A] text-white">
+
+    <div class="max-w-7xl mx-auto
+                px-5 sm:px-6 lg:px-8
+                py-10">
+
+        <div class="flex flex-col
+                    lg:flex-row
+                    justify-between
+                    gap-8">
+
+
+            <!-- Brand -->
+            <div>
+
+                <div class="flex items-center gap-3">
+
+                    
+
+                    <span class="font-bold">
+                        AI Job Application Assistant
+                    </span>
+
+                </div>
+
+                <p class="mt-3 text-sm text-slate-400 max-w-xs">
+                    Smarter Applications. Better Opportunities.
+                </p>
+
+            </div>
+
+
+            <!-- Footer Links -->
+            <div class="flex flex-wrap gap-x-8 gap-y-3">
+
+                <a href="#home"
+                   class="text-sm text-slate-300 hover:text-white">
+                    Home
+                </a>
+
+                <a href="#features"
+                   class="text-sm text-slate-300 hover:text-white">
+                    Features
+                </a>
+
+                <a href="#how-it-works"
+                   class="text-sm text-slate-300 hover:text-white">
+                    How It Works
+                </a>
+
+                <a href="#about"
+                   class="text-sm text-slate-300 hover:text-white">
+                    About
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bottom -->
+        <div class="mt-8 pt-6
+                    border-t border-white/10
+                    flex flex-col sm:flex-row
+                    justify-between
+                    gap-3">
+
+            <p class="text-xs text-slate-400">
+                © 2026 AI Job Application Assistant.
+                All rights reserved.
+            </p>
+
+            <div class="flex gap-4">
+
+                <a href="#"
+                   class="text-slate-400 hover:text-white text-sm">
+                    LinkedIn
+                </a>
+
+                <a href="#"
+                   class="text-slate-400 hover:text-white text-sm">
+                    GitHub
+                </a>
+
+                <a href="#"
+                   class="text-slate-400 hover:text-white text-sm">
+                    Twitter
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+{% block extra_js %}
+
+<script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', function () {
+        mobileMenu.classList.toggle('hidden');
+
+        const isOpen = !mobileMenu.classList.contains('hidden');
+
+        mobileMenuButton.setAttribute('aria-expanded', isOpen);
+    });
+
+
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', function () {
+            mobileMenu.classList.add('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+        });
+    });
+</script>
+
+{% endblock %}
+
+{% endblock %}

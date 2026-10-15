@@ -1,0 +1,634 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My CVs | AI Job Application Assistant
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- ==============================
+     NAVBAR
+================================ -->
+
+{% include "navbar.html" %}
+
+
+
+<!-- ==============================
+     MAIN
+================================ -->
+
+<main
+    class="lg:ml-[245px]
+           min-h-screen
+           bg-white
+           pt-[64px]
+           lg:pt-0"
+>
+
+
+    <!-- ==============================
+         HEADER
+    =============================== -->
+
+    {% include "header.html" %}
+
+
+
+    <!-- ==============================
+         CONTENT
+    =============================== -->
+
+    <div
+        class="px-4
+               sm:px-6
+               lg:px-8
+               py-6
+               sm:py-8"
+    >
+
+
+        <!-- ==============================
+             PAGE TITLE
+        =============================== -->
+
+        <div
+            class="flex
+                   flex-col
+                   sm:flex-row
+                   sm:items-center
+                   sm:justify-between
+                   gap-4
+                   mb-7"
+        >
+
+            <div>
+
+                <h2
+                    class="text-2xl
+                           sm:text-3xl
+                           font-bold
+                           text-[#101936]"
+                >
+                    My CV
+                </h2>
+
+                <p
+                    class="mt-2
+                           text-sm
+                           sm:text-base
+                           text-slate-500"
+                >
+                    Manage your uploaded CV
+                </p>
+
+            </div>
+
+
+
+            <!-- ==========================
+                 UPLOAD CV BUTTON
+            =========================== -->
+
+            <a
+                href="{% url 'upload_cv' %}"
+                class="inline-flex
+                       items-center
+                       justify-center
+                       gap-2
+                       px-5
+                       py-3
+                       rounded-xl
+                       bg-indigo-600
+                       text-white
+                       text-sm
+                       font-semibold
+                       hover:bg-indigo-700
+                       transition
+                       shadow-sm"
+            >
+
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                >
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 5v14M5 12h14"
+                    />
+
+                </svg>
+
+                Upload CV
+
+            </a>
+
+        </div>
+
+
+
+        <!-- ==============================
+             MESSAGES
+        =============================== -->
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div
+                    class="mb-5
+                           px-4
+                           py-3
+                           rounded-xl
+                           border
+                           {% if message.tags == 'error' %}
+                               bg-red-50
+                               text-red-700
+                               border-red-200
+                           {% else %}
+                               bg-green-50
+                               text-green-700
+                               border-green-200
+                           {% endif %}"
+                >
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+
+        <!-- ==============================
+             SAVED CVS HEADER
+        =============================== -->
+
+        <div
+            class="flex
+                   flex-col
+                   sm:flex-row
+                   sm:items-center
+                   sm:justify-between
+                   gap-3
+                   mb-5"
+        >
+
+            <div>
+
+                
+            </div>
+
+
+
+            <!-- CV COUNT -->
+
+            <div
+                class="inline-flex
+                       items-center
+                       gap-2
+                       px-4
+                       py-2
+                       rounded-xl
+                       bg-indigo-50
+                       text-indigo-700
+                       text-sm
+                       font-semibold
+                       w-fit"
+            >
+
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                >
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h6l5 5v11a2 2 0 01-2 2z"
+                    />
+
+                </svg>
+
+                {{ cv_count }} CV{{ cv_count|pluralize }}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==============================
+             CV LIST
+        =============================== -->
+
+        {% if cvs %}
+
+            <div
+                class="bg-white
+                       border
+                       border-slate-200
+                       rounded-2xl
+                       shadow-sm
+                       overflow-hidden"
+            >
+
+                {% for cv in cvs %}
+
+                    <div
+                        class="p-5
+                               sm:p-6
+                               border-b
+                               border-slate-100
+                               last:border-b-0
+                               hover:bg-slate-50/50
+                               transition"
+                    >
+
+                        <div
+                            class="flex
+                                   flex-col
+                                   lg:flex-row
+                                   lg:items-center
+                                   lg:justify-between
+                                   gap-5"
+                        >
+
+
+                            <!-- ==========================
+                                 CV INFORMATION
+                            =========================== -->
+
+                            <div
+                                class="flex
+                                       items-center
+                                       gap-4
+                                       min-w-0"
+                            >
+
+                                <!-- File Icon -->
+
+                                <div
+                                    class="w-12
+                                           h-12
+                                           rounded-xl
+                                           bg-blue-50
+                                           text-blue-600
+                                           flex
+                                           items-center
+                                           justify-center
+                                           shrink-0"
+                                >
+
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        viewBox="0 0 24 24"
+                                    >
+
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"
+                                        />
+
+                                        <polyline
+                                            points="14 2 14 8 20 8"
+                                        />
+
+                                        <line
+                                            x1="8"
+                                            y1="13"
+                                            x2="16"
+                                            y2="13"
+                                        />
+
+                                        <line
+                                            x1="8"
+                                            y1="17"
+                                            x2="16"
+                                            y2="17"
+                                        />
+
+                                    </svg>
+
+                                </div>
+
+
+
+                                <!-- CV NAME -->
+
+                                <div
+                                    class="min-w-0"
+                                >
+
+                                    <h4
+                                        class="text-base
+                                               sm:text-lg
+                                               font-semibold
+                                               text-[#101936]
+                                               truncate"
+                                    >
+                                        {{ cv.name }}
+                                    </h4>
+
+
+                                    <p
+                                        class="text-xs
+                                               sm:text-sm
+                                               text-slate-500
+                                               mt-1"
+                                    >
+
+                                        {{ cv.file_extension }}
+
+                                        <span class="mx-1">
+                                            •
+                                        </span>
+
+                                        Uploaded
+                                        {{ cv.uploaded_at|date:"d M Y" }}
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- ==========================
+                                 ACTION BUTTONS
+                            =========================== -->
+
+                            <div
+                                class="flex
+                                       items-center
+                                       gap-1
+                                       sm:gap-2
+                                       lg:shrink-0"
+                            >
+
+
+                                <!-- DOWNLOAD -->
+
+                                <a
+                                    href="{% url 'download_cv' cv.id %}"
+                                    class="inline-flex
+                                           items-center
+                                           justify-center
+                                           gap-1.5
+                                           px-3
+                                           py-2
+                                           rounded-lg
+                                           text-sm
+                                           font-semibold
+                                           text-indigo-600
+                                           hover:bg-indigo-50
+                                           transition"
+                                >
+
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        viewBox="0 0 24 24"
+                                    >
+
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
+                                        />
+
+                                    </svg>
+
+                                    Download
+
+                                </a>
+
+
+
+                                <!-- DELETE -->
+
+                                <form
+                                    method="POST"
+                                    action="{% url 'delete_cv' cv.id %}"
+                                    onsubmit="return confirm(
+                                        'Are you sure you want to delete this CV? This action cannot be undone.'
+                                    );"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="inline-flex
+                                               items-center
+                                               justify-center
+                                               gap-1.5
+                                               px-3
+                                               py-2
+                                               rounded-lg
+                                               text-sm
+                                               font-semibold
+                                               text-red-600
+                                               hover:bg-red-50
+                                               transition"
+                                    >
+
+                                        <svg
+                                            class="w-4 h-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            viewBox="0 0 24 24"
+                                        >
+
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M3 6h18"
+                                            />
+
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M8 6V4a1 1 0 011-1h6a1 1 0 011 1v2"
+                                            />
+
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M19 6l-1 15H6L5 6"
+                                            />
+
+                                        </svg>
+
+                                        Delete
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- ==============================
+                 EMPTY STATE
+            =============================== -->
+
+            <div
+                class="bg-white
+                       border
+                       border-slate-200
+                       rounded-2xl
+                       shadow-sm
+                       p-10
+                       sm:p-14
+                       text-center"
+            >
+
+                <div
+                    class="w-16
+                           h-16
+                           mx-auto
+                           rounded-2xl
+                           bg-indigo-50
+                           text-indigo-600
+                           flex
+                           items-center
+                           justify-center
+                           mb-5"
+                >
+
+                    <svg
+                        class="w-8 h-8"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"
+                        />
+
+                        <polyline
+                            points="14 2 14 8 20 8"
+                        />
+
+                        <line
+                            x1="8"
+                            y1="13"
+                            x2="16"
+                            y2="13"
+                        />
+
+                        <line
+                            x1="8"
+                            y1="17"
+                            x2="13"
+                            y2="17"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h3
+                    class="text-xl
+                           font-bold
+                           text-[#101936]"
+                >
+                    No CVs uploaded yet
+                </h3>
+
+
+                <p
+                    class="text-sm
+                           text-slate-500
+                           mt-2
+                           mb-6"
+                >
+                    Upload your first CV to get started.
+                </p>
+
+
+                <a
+                    href="{% url 'upload_cv' %}"
+                    class="inline-flex
+                           items-center
+                           gap-2
+                           px-5
+                           py-3
+                           rounded-xl
+                           bg-indigo-600
+                           text-white
+                           text-sm
+                           font-semibold
+                           hover:bg-indigo-700
+                           transition"
+                >
+
+                    <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M12 5v14M5 12h14"
+                        />
+
+                    </svg>
+
+                    Upload CV
+
+                </a>
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+</main>
+
+
+{% endblock %}

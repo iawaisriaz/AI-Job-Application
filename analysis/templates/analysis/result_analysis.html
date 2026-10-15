@@ -1,0 +1,569 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+New Job Analysis | Results
+{% endblock %}
+
+{% block content %}
+
+{% include "navbar.html" %}
+
+<main class="lg:ml-[245px] min-h-screen bg-white pt-[64px] lg:pt-0">
+
+    {% include "header.html" %}
+
+    <div class="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+        <!-- TITLE -->
+
+        <div class="mb-7">
+
+            <h2
+                class="text-2xl
+                       sm:text-3xl
+                       font-bold
+                       text-[#101936]"
+            >
+                New Job Analysis
+            </h2>
+
+            <p
+                class="mt-2
+                       text-sm
+                       sm:text-base
+                       text-slate-500"
+            >
+                Here are your detailed results and AI-powered insights.
+            </p>
+
+        </div>
+
+
+        <!-- STEPS -->
+
+      {% include "progress_steps.html" with current_step=4 %}
+
+
+        <!-- RESULTS -->
+
+        <div
+            class="max-w-4xl
+                   mx-auto
+                   bg-white
+                   border
+                   border-slate-200
+                   rounded-2xl
+                   shadow-sm
+                   p-5
+                   sm:p-6"
+        >
+
+
+            <!-- OVERALL MATCH -->
+
+            <div
+                class="border
+                       border-slate-200
+                       rounded-xl
+                       p-5
+                       sm:p-6"
+            >
+
+                <div
+                    class="flex
+                           flex-col
+                           sm:flex-row
+                           items-center
+                           gap-6"
+                >
+
+                    <!-- SCORE -->
+
+                    <div
+                        class="relative
+                               w-28
+                               h-28
+                               shrink-0"
+                    >
+
+                        <svg
+                            class="w-full
+                                   h-full
+                                   -rotate-90"
+                            viewBox="0 0 120 120"
+                        >
+
+                            <circle
+                                cx="60"
+                                cy="60"
+                                r="50"
+                                fill="none"
+                                stroke="#e2e8f0"
+                                stroke-width="10"
+                            />
+
+                            <circle
+                                cx="60"
+                                cy="60"
+                                r="50"
+                                fill="none"
+                                stroke="#10b981"
+                                stroke-width="10"
+                                stroke-linecap="round"
+                                stroke-dasharray="314"
+                                stroke-dashoffset="{{ score_dashoffset }}"
+                            />
+
+                        </svg>
+
+
+                        <div
+                            class="absolute
+                                   inset-0
+                                   flex
+                                   items-center
+                                   justify-center"
+                        >
+
+                            <span
+                                class="text-2xl
+                                       font-bold
+                                       text-[#101936]"
+                            >
+                                {{ match_score }}%
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TEXT -->
+
+                    <div
+                        class="text-center
+                               sm:text-left
+                               flex-1"
+                    >
+
+                        <h3
+                            class="text-lg
+                                   font-bold
+                                   text-[#101936]"
+                        >
+                            Overall Match Score
+                        </h3>
+
+                        <p
+                            class="mt-1
+                                   text-sm
+                                   text-slate-500"
+                        >
+                            Your CV is a
+                            {{ match_label|lower }}
+                            for this job.
+                        </p>
+
+                    </div>
+
+
+                    <!-- LABEL -->
+
+                    <span
+                        class="px-4
+                               py-2
+                               rounded-full
+                               bg-emerald-50
+                               text-emerald-600
+                               text-xs
+                               font-semibold"
+                    >
+                        {{ match_label }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- SKILLS -->
+
+            <div
+                class="grid
+                       grid-cols-1
+                       md:grid-cols-2
+                       gap-4
+                       mt-4"
+            >
+
+
+                <!-- MATCHED -->
+
+                <div
+                    class="border
+                           border-slate-200
+                           rounded-xl
+                           p-5"
+                >
+
+                    <div
+                        class="flex
+                               items-center
+                               justify-between
+                               mb-4"
+                    >
+
+                        <h3
+                            class="font-bold
+                                   text-[#101936]
+                                   flex
+                                   items-center
+                                   gap-2"
+                        >
+
+                            <span
+                                class="w-5
+                                       h-5
+                                       rounded-full
+                                       bg-emerald-50
+                                       text-emerald-600
+                                       flex
+                                       items-center
+                                       justify-center
+                                       text-xs"
+                            >
+                                ✓
+                            </span>
+
+                            Matched Skills
+
+                        </h3>
+
+
+                        <span
+                            class="text-sm
+                                   font-semibold
+                                   text-emerald-600"
+                        >
+                            {{ matched_count }}/{{ total_skill_count }}
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="flex
+                               flex-wrap
+                               gap-2"
+                    >
+
+                        {% for skill in matched_skills %}
+
+                            <span
+                                class="px-3
+                                       py-1.5
+                                       rounded-full
+                                       bg-emerald-50
+                                       text-emerald-700
+                                       text-xs
+                                       font-medium"
+                            >
+                                {{ skill }}
+                            </span>
+
+                        {% empty %}
+
+                            <span class="text-xs text-slate-500">
+                                No matched skills found.
+                            </span>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- MISSING -->
+
+                <div
+                    class="border
+                           border-slate-200
+                           rounded-xl
+                           p-5"
+                >
+
+                    <div
+                        class="flex
+                               items-center
+                               justify-between
+                               mb-4"
+                    >
+
+                        <h3
+                            class="font-bold
+                                   text-[#101936]
+                                   flex
+                                   items-center
+                                   gap-2"
+                        >
+
+                            <span
+                                class="w-5
+                                       h-5
+                                       rounded-full
+                                       bg-red-50
+                                       text-red-500
+                                       flex
+                                       items-center
+                                       justify-center
+                                       text-xs"
+                            >
+                                !
+                            </span>
+
+                            Missing Skills
+
+                        </h3>
+
+
+                        <span
+                            class="text-sm
+                                   font-semibold
+                                   text-red-500"
+                        >
+                            {{ missing_count }}/{{ total_skill_count }}
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="flex
+                               flex-wrap
+                               gap-2"
+                    >
+
+                        {% for skill in missing_skills %}
+
+                            <span
+                                class="px-3
+                                       py-1.5
+                                       rounded-full
+                                       bg-red-50
+                                       text-red-600
+                                       text-xs
+                                       font-medium"
+                            >
+                                {{ skill }}
+                            </span>
+
+                        {% empty %}
+
+                            <span class="text-xs text-slate-500">
+                                No important missing skills found.
+                            </span>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STRENGTHS / WEAK AREAS -->
+
+            <div
+                class="grid
+                       grid-cols-1
+                       md:grid-cols-2
+                       gap-4
+                       mt-4"
+            >
+
+                <!-- STRENGTHS -->
+
+                <div
+                    class="border
+                           border-slate-200
+                           rounded-xl
+                           p-5"
+                >
+
+                    <h3
+                        class="font-bold
+                               text-[#101936]
+                               flex
+                               items-center
+                               gap-2
+                               mb-3"
+                    >
+
+                        <span
+                            class="w-5
+                                   h-5
+                                   rounded-full
+                                   bg-emerald-50
+                                   text-emerald-600
+                                   flex
+                                   items-center
+                                   justify-center
+                                   text-xs"
+                        >
+                            ✓
+                        </span>
+
+                        Strengths
+
+                    </h3>
+
+
+                    <ul
+                        class="space-y-2
+                               text-xs
+                               text-slate-600"
+                    >
+
+                        {% for item in strengths %}
+
+                            <li class="flex gap-2">
+
+                                <span
+                                    class="text-emerald-500"
+                                >
+                                    •
+                                </span>
+
+                                {{ item }}
+
+                            </li>
+
+                        {% empty %}
+
+                            <li>
+                                No strengths identified.
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+
+                <!-- WEAK AREAS -->
+
+                <div
+                    class="border
+                           border-slate-200
+                           rounded-xl
+                           p-5"
+                >
+
+                    <h3
+                        class="font-bold
+                               text-[#101936]
+                               flex
+                               items-center
+                               gap-2
+                               mb-3"
+                    >
+
+                        <span
+                            class="w-5
+                                   h-5
+                                   rounded-full
+                                   bg-red-50
+                                   text-red-500
+                                   flex
+                                   items-center
+                                   justify-center
+                                   text-xs"
+                        >
+                            !
+                        </span>
+
+                        Weak Areas
+
+                    </h3>
+
+
+                    <ul
+                        class="space-y-2
+                               text-xs
+                               text-slate-600"
+                    >
+
+                        {% for item in weak_areas %}
+
+                            <li class="flex gap-2">
+
+                                <span
+                                    class="text-red-500"
+                                >
+                                    •
+                                </span>
+
+                                {{ item }}
+
+                            </li>
+
+                        {% empty %}
+
+                            <li>
+                                No major weak areas identified.
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- DETAILED ANALYSIS -->
+
+            {% if detailed_analysis %}
+
+                <div
+                    class="mt-4
+                           border
+                           border-slate-200
+                           rounded-xl
+                           p-5"
+                >
+
+                    <h3
+                        class="font-bold
+                               text-[#101936]
+                               mb-3"
+                    >
+                        AI Analysis
+                    </h3>
+
+                    <p
+                        class="text-sm
+                               leading-6
+                               text-slate-600
+                               whitespace-pre-line"
+                    >
+                        {{ detailed_analysis }}
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}

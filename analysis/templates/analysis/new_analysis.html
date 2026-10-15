@@ -1,0 +1,434 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+New Job Analysis | AI Job Application Assistant
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- ==============================
+     NAVBAR
+================================ -->
+
+{% include "navbar.html" %}
+
+
+
+<!-- ==============================
+     MAIN
+================================ -->
+
+<main
+    class="lg:ml-[245px]
+           min-h-screen
+           bg-white
+           pt-[64px]
+           lg:pt-0"
+>
+
+
+    <!-- ==============================
+         HEADER
+    =============================== -->
+
+    {% include "header.html" %}
+
+
+
+    <!-- ==============================
+         CONTENT
+    =============================== -->
+
+    <div
+        class="px-4
+               sm:px-6
+               lg:px-8
+               py-6
+               sm:py-8"
+    >
+
+
+        <!-- ==============================
+             PAGE TITLE
+        =============================== -->
+
+        <div class="mb-7">
+
+            <h2
+                class="text-2xl
+                       sm:text-3xl
+                       font-bold
+                       text-[#101936]"
+            >
+                New Job Analysis
+            </h2>
+
+
+            <p
+                class="mt-2
+                       text-sm
+                       sm:text-base
+                       text-slate-500"
+            >
+                Enter the job details and select your CV to get AI-powered insights.
+            </p>
+
+        </div>
+
+
+
+        <!-- ==============================
+             PROGRESS STEPS
+        =============================== -->
+
+        {% include "progress_steps.html" with current_step=1 %}
+          
+
+        <!-- ==============================
+             JOB DETAILS CARD
+        =============================== -->
+
+        <div
+            class="bg-white
+                   border
+                   border-slate-200
+                   rounded-2xl
+                   shadow-sm
+                   max-w-8xl"
+        >
+
+            <div class="p-5 sm:p-7">
+
+
+                <!-- CARD TITLE -->
+
+                <h3
+                    class="text-lg
+                           sm:text-xl
+                           font-bold
+                           text-[#101936]
+                           mb-6"
+                >
+                    Job Details
+                </h3>
+
+
+
+                <!-- ==============================
+                     MESSAGES
+                =============================== -->
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div
+                            class="mb-5
+                                   px-4
+                                   py-3
+                                   rounded-xl
+                                   border
+                                   {% if message.tags == 'error' %}
+                                       bg-red-50
+                                       text-red-700
+                                       border-red-200
+                                   {% else %}
+                                       bg-green-50
+                                       text-green-700
+                                       border-green-200
+                                   {% endif %}"
+                        >
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+
+                <!-- ==============================
+                     FORM
+                =============================== -->
+
+                <form
+                    method="POST"
+                    action="{% url 'new_analysis' %}"
+                >
+
+                    {% csrf_token %}
+
+
+
+                    <!-- ==========================
+                         COMPANY NAME
+                    =========================== -->
+
+                    <div class="mb-5">
+
+                        <label
+                            for="company_name"
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   text-[#101936]
+                                   mb-2"
+                        >
+
+                            Company Name
+
+                            <span class="text-red-500">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="company_name"
+                            name="company_name"
+                            placeholder="e.g. Google, Microsoft, ABC Technologies"
+                            value="{{ request.POST.company_name|default:'' }}"
+                            required
+                            class="w-full
+                                   px-4
+                                   py-3
+                                   rounded-lg
+                                   border
+                                   border-slate-300
+                                   text-sm
+                                   text-slate-700
+                                   placeholder-slate-400
+                                   outline-none
+                                   focus:border-blue-500
+                                   focus:ring-2
+                                   focus:ring-blue-100
+                                   transition"
+                        >
+
+                    </div>
+
+
+
+                    <!-- ==========================
+                         JOB TITLE
+                    =========================== -->
+
+                    <div class="mb-5">
+
+                        <label
+                            for="job_title"
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   text-[#101936]
+                                   mb-2"
+                        >
+
+                            Job Title
+
+                            <span class="text-red-500">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="job_title"
+                            name="job_title"
+                            placeholder="e.g. Python Developer"
+                            value="{{ request.POST.job_title|default:'' }}"
+                            required
+                            class="w-full
+                                   px-4
+                                   py-3
+                                   rounded-lg
+                                   border
+                                   border-slate-300
+                                   text-sm
+                                   text-slate-700
+                                   placeholder-slate-400
+                                   outline-none
+                                   focus:border-blue-500
+                                   focus:ring-2
+                                   focus:ring-blue-100
+                                   transition"
+                        >
+
+                    </div>
+
+
+
+                    <!-- ==========================
+                         JOB DESCRIPTION
+                    =========================== -->
+
+                    <div class="mb-6">
+
+                        <label
+                            for="job_description"
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   text-[#101936]
+                                   mb-2"
+                        >
+
+                            Job Description
+
+                            <span class="text-red-500">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <textarea
+                            id="job_description"
+                            name="job_description"
+                            rows="7"
+                            maxlength="5000"
+                            placeholder="Paste the complete job description here..."
+                            required
+                            class="w-full
+                                   px-4
+                                   py-3
+                                   rounded-lg
+                                   border
+                                   border-slate-300
+                                   text-sm
+                                   text-slate-700
+                                   placeholder-slate-400
+                                   outline-none
+                                   resize-none
+                                   focus:border-blue-500
+                                   focus:ring-2
+                                   focus:ring-blue-100
+                                   transition"
+                            oninput="updateCharacterCount()"
+                        >{{ request.POST.job_description|default:'' }}</textarea>
+
+
+                        <!-- CHARACTER COUNT -->
+
+                        <div
+                            class="flex
+                                   justify-end
+                                   mt-1"
+                        >
+
+                            <span
+                                id="character-count"
+                                class="text-xs
+                                       text-slate-400"
+                            >
+                                0/5000
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==========================
+                         NEXT BUTTON
+                    =========================== -->
+
+                    <button
+                        type="submit"
+                        class="w-full
+                               inline-flex
+                               items-center
+                               justify-center
+                               gap-2
+                               px-5
+                               py-3
+                               rounded-lg
+                               bg-blue-600
+                               text-white
+                               text-sm
+                               font-semibold
+                               hover:bg-blue-700
+                               focus:outline-none
+                               focus:ring-2
+                               focus:ring-blue-200
+                               transition
+                               shadow-sm"
+                    >
+
+                        Next: Select CV
+
+
+                        <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M5 12h14"
+                            />
+
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M13 6l6 6-6 6"
+                            />
+
+                        </svg>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- ==============================
+     CHARACTER COUNTER
+================================ -->
+
+<script>
+
+function updateCharacterCount() {
+
+    const textarea =
+        document.getElementById("job_description");
+
+    const counter =
+        document.getElementById("character-count");
+
+    counter.textContent =
+        textarea.value.length + "/5000";
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    updateCharacterCount
+);
+
+</script>
+
+
+{% endblock %}

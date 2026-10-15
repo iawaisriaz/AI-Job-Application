@@ -1,0 +1,449 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Analysis History | AI Job Application Assistant
+{% endblock %}
+
+{% block content %}
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+{% include "navbar.html" %}
+
+
+<!-- =====================================
+     MAIN CONTENT
+===================================== -->
+<main class="lg:ml-[245px] min-h-screen bg-white pt-[64px] lg:pt-0">
+
+    <!-- HEADER -->
+    {% include "header.html" %}
+
+    <div class="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+        <!-- =====================================
+             PAGE TITLE
+        ===================================== -->
+        <div class="mb-7 flex flex-col gap-4
+                    sm:flex-row sm:items-center
+                    sm:justify-between">
+
+            <div>
+                <h2 class="text-2xl sm:text-3xl
+                           font-bold text-[#101936]">
+                    Analysis History
+                </h2>
+
+                <p class="mt-2 text-sm sm:text-base text-slate-500">
+                    View and manage your previous CV analysis results.
+                </p>
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================
+             DJANGO MESSAGES
+        ===================================== -->
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="mb-5 rounded-xl border px-4 py-3
+                            text-sm font-medium
+                            {% if message.tags == 'error' %}
+                                bg-red-50 text-red-700 border-red-200
+                            {% else %}
+                                bg-green-50 text-green-700 border-green-200
+                            {% endif %}">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        <!-- =====================================
+             SUMMARY CARD
+        ===================================== -->
+        <div class="mb-6 bg-white border border-slate-200
+                    rounded-2xl shadow-sm p-5">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <p class="text-sm font-medium text-slate-500">
+                        Total Completed Analyses
+                    </p>
+
+                    <h3 class="mt-2 text-3xl font-bold text-[#101936]">
+                        {{ total_analyses }}
+                    </h3>
+                </div>
+
+                <div class="w-12 h-12 rounded-xl bg-blue-50
+                            flex items-center justify-center">
+
+                    <svg class="w-6 h-6 text-blue-600"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8"
+                         viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M9 12h6m-6 4h6M9 8h6M5 4h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z" />
+
+                    </svg>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             HISTORY TABLE CARD
+        ===================================== -->
+        <div class="bg-white border border-slate-200
+                    rounded-2xl shadow-sm overflow-hidden">
+
+            <!-- TABLE HEADER -->
+            <div class="px-5 sm:px-7 py-5
+                        border-b border-slate-200">
+
+                <h3 class="text-lg sm:text-xl font-bold text-[#101936]">
+                    Previous Analyses
+                </h3>
+
+                <p class="mt-1 text-sm text-slate-500">
+                    View saved results or delete analyses you no longer need.
+                </p>
+
+            </div>
+
+
+            {% if analyses %}
+
+            <!-- =====================================
+                 TABLE
+            ===================================== -->
+            <div class="overflow-x-auto">
+
+                <table class="w-full min-w-[680px] text-left text-sm">
+
+                    <!-- TABLE HEAD -->
+                    <thead class="bg-slate-50 border-b border-slate-200">
+
+                        <tr>
+                            <th class="px-5 sm:px-7 py-4
+                                       font-semibold text-slate-600">
+                                Job Title
+                            </th>
+
+                            <th class="px-5 py-4
+                                       font-semibold text-slate-600">
+                                Company Name
+                            </th>
+
+                            <th class="px-5 py-4
+                                       font-semibold text-slate-600">
+                                Cv Used
+                            </th>
+
+                            <th class="px-5 py-4
+                                       font-semibold text-slate-600">
+                                Date
+                            </th>
+
+                            <th class="px-5 py-4
+                                       font-semibold text-slate-600
+                                       text-center">
+                                Actions
+                            </th>
+                        </tr>
+
+                    </thead>
+
+
+                    <!-- TABLE BODY -->
+                    <tbody class="divide-y divide-slate-100">
+
+                        {% for analysis in analyses %}
+
+                        <tr class="hover:bg-slate-50 transition">
+
+                            <!-- JOB TITLE -->
+                            <td class="px-5 sm:px-7 py-4">
+
+                                <span class="font-semibold text-[#101936]">
+                                    {{ analysis.job_title }}
+                                </span>
+
+                            </td>
+
+
+                            <!-- COMPANY NAME -->
+                            <td class="px-5 py-4 text-slate-600">
+
+                                {{ analysis.company_name }}
+
+                            </td>
+
+                            <!-- CV USED -->
+                            <!-- CV USED -->
+<td class="px-5 py-4 text-slate-600">
+
+    {% if analysis.cv %}
+        {{ analysis.cv.name }}
+    {% else %}
+        <span class="text-slate-400">No CV</span>
+    {% endif %}
+
+</td>
+
+
+                            <!-- DATE -->
+                            <td class="px-5 py-4
+                                       whitespace-nowrap text-slate-500">
+
+                                {{ analysis.created_at|date:"d M Y" }}
+
+                            </td>
+
+
+                            <!-- =====================================
+                                 ACTION BUTTONS
+                            ===================================== -->
+                            <td class="px-5 py-4">
+
+                                <div class="flex items-center
+                                            justify-center gap-2">
+
+                                    <!-- VIEW BUTTON -->
+                                    <a href="{% url 'result_analysis' analysis.id %}"
+                                       class="inline-flex items-center
+                                              justify-center rounded-lg
+                                              bg-blue-50 px-4 py-2
+                                              text-sm font-semibold
+                                              text-blue-600
+                                              hover:bg-blue-600
+                                              hover:text-white
+                                              transition">
+
+                                        <svg class="w-4 h-4 mr-1.5"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="2"
+                                             viewBox="0 0 24 24">
+
+                                            <path stroke-linecap="round"
+                                                  stroke-linejoin="round"
+                                                  d="M2.25 12s3.5-6 9.75-6
+                                                     9.75 6 9.75 6
+                                                     -3.5 6-9.75 6
+                                                     -9.75-6-9.75-6z" />
+
+                                            <circle cx="12"
+                                                    cy="12"
+                                                    r="3" />
+
+                                        </svg>
+
+                                        View
+
+                                    </a>
+
+
+                                    <!-- DELETE FORM -->
+                                    <form method="POST"
+                                          action="{% url 'delete_analysis' analysis.id %}"
+                                          onsubmit="return confirmDelete();">
+
+                                        {% csrf_token %}
+
+                                        <button type="submit"
+                                                class="inline-flex items-center
+                                                       justify-center rounded-lg
+                                                       bg-red-50 px-4 py-2
+                                                       text-sm font-semibold
+                                                       text-red-600
+                                                       hover:bg-red-600
+                                                       hover:text-white
+                                                       transition">
+
+                                            <svg class="w-4 h-4 mr-1.5"
+                                                 fill="none"
+                                                 stroke="currentColor"
+                                                 stroke-width="2"
+                                                 viewBox="0 0 24 24">
+
+                                                <path stroke-linecap="round"
+                                                      stroke-linejoin="round"
+                                                      d="M3 6h18m-2 0
+                                                         -1 14H6L5 6
+                                                         m3 0V4h8v2
+                                                         M10 10v7
+                                                         m4-7v7" />
+
+                                            </svg>
+
+                                            Delete
+
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- =====================================
+                 PAGINATION
+            ===================================== -->
+            {% if page_obj.has_other_pages %}
+
+            <div class="flex flex-col sm:flex-row
+                        items-center justify-between gap-3
+                        px-5 sm:px-7 py-4
+                        border-t border-slate-200">
+
+                <p class="text-sm text-slate-500">
+                    Showing page {{ page_obj.number }}
+                    of {{ page_obj.paginator.num_pages }}
+                </p>
+
+                <div class="flex items-center gap-2">
+
+                    <!-- PREVIOUS -->
+                    {% if page_obj.has_previous %}
+
+                    <a href="?page={{ page_obj.previous_page_number }}"
+                       class="px-4 py-2 rounded-lg
+                              border border-slate-200
+                              text-sm font-medium text-slate-700
+                              hover:bg-slate-50 transition">
+
+                        Previous
+
+                    </a>
+
+                    {% endif %}
+
+
+                    <!-- NEXT -->
+                    {% if page_obj.has_next %}
+
+                    <a href="?page={{ page_obj.next_page_number }}"
+                       class="px-4 py-2 rounded-lg
+                              border border-slate-200
+                              text-sm font-medium text-slate-700
+                              hover:bg-slate-50 transition">
+
+                        Next
+
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            {% else %}
+
+            <!-- =====================================
+                 EMPTY HISTORY
+            ===================================== -->
+            <div class="px-6 py-16 text-center">
+
+                <div class="mx-auto mb-4 flex
+                            w-16 h-16 items-center justify-center
+                            rounded-full bg-blue-50">
+
+                    <svg class="w-8 h-8 text-blue-600"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8"
+                         viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M12 8v4l3 2m6-2
+                                 a9 9 0 11-18 0
+                                 9 9 0 0118 0z" />
+
+                    </svg>
+
+                </div>
+
+                <h3 class="text-lg font-bold text-[#101936]">
+                    No Analysis History Yet
+                </h3>
+
+                <p class="mt-2 text-sm text-slate-500 max-w-md mx-auto">
+                    You haven't completed any job analyses yet.
+                    Once you analyze a CV, your results will appear here.
+                </p>
+
+                <a href="{% url 'new_analysis' %}"
+                   class="mt-6 inline-flex items-center
+                          justify-center px-5 py-3
+                          rounded-lg bg-blue-600
+                          text-sm font-semibold text-white
+                          hover:bg-blue-700 transition">
+
+                    Create New Analysis
+
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =====================================
+     DELETE CONFIRMATION SCRIPT
+===================================== -->
+<script>
+
+    function confirmDelete() {
+
+        return confirm(
+            "Are you sure you want to delete this analysis?\n\n" +
+            "This action cannot be undone."
+        );
+
+    }
+
+</script>
+
+{% endblock %}

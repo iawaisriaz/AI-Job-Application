@@ -1,0 +1,491 @@
+{% load static %}
+
+<!-- ==============================
+     MOBILE OVERLAY
+================================ -->
+
+<div
+    id="sidebar-overlay"
+    class="fixed inset-0
+           bg-black/50
+           z-40
+           hidden
+           lg:hidden"
+    onclick="toggleSidebar()"
+></div>
+
+
+<!-- ==============================
+     SIDEBAR NAVBAR
+================================ -->
+
+<aside
+    id="sidebar"
+    class="fixed top-0 left-0 bottom-0
+           w-[245px]
+           bg-[#071a33]
+           text-white
+           flex flex-col
+           z-50
+           transform -translate-x-full
+           lg:translate-x-0
+           transition-transform duration-300 ease-in-out"
+>
+
+    <!-- ==============================
+         LOGO / APP NAME
+    =============================== -->
+
+    <div
+        class="h-[72px]
+               px-5
+               lg:px-6
+               flex items-center
+               gap-1
+               border-b border-white/10
+               shrink-0"
+    >
+
+        <!-- Logo -->
+        <div
+            class="flex items-center
+                   justify-center
+                   shrink-0"
+        >
+
+            <img
+                src="{% static 'images/light-logo.png' %}"
+                alt="AI Job Applicant Assistant"
+                class="w-10 h-10 object-contain scale-[1.4]"
+            >
+
+        </div>
+
+
+        <!-- App Name -->
+        <div class="leading-tight min-w-0">
+
+            <h1
+                class="text-[16px]
+                       font-bold
+                       whitespace-nowrap"
+            >
+                AI Job Applicant
+            </h1>
+
+            <p
+                class="text-[16px]
+                       font-bold
+                       whitespace-nowrap"
+            >
+                Assistant
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         NAVIGATION
+    =============================== -->
+
+    <nav
+        class="flex-1
+               px-4
+               py-6
+               overflow-y-auto"
+    >
+
+        <!-- ==============================
+             DASHBOARD
+        =============================== -->
+
+        <a
+            href="{% url 'dashboard' %}"
+            class="flex items-center gap-4
+                   px-4 py-2.5
+                   mb-3
+                   rounded-xl
+                   text-white
+                   transition
+                   {% if request.resolver_match.url_name == 'dashboard' %}
+                       bg-gradient-to-r from-indigo-600 to-indigo-500
+                       font-medium
+                   {% else %}
+                       hover:bg-white/10
+                   {% endif %}"
+        >
+
+            <svg
+                class="w-6 h-6 shrink-0"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+            >
+
+                <path
+                    d="M3 13h7V3H3v10zm0 8h7v-6H3v6zm11 0h7V11h-7v10zm0-18v6h7V3h-7z"
+                />
+
+            </svg>
+
+            <span>
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <!-- ==============================
+             MY CV
+        =============================== -->
+
+        <a
+            href="{% url 'cv' %}"
+            class="flex items-center gap-4
+                   px-4 py-3.5
+                   mb-3
+                   rounded-xl
+                   text-white
+                   transition
+                   {% if request.resolver_match.url_name == 'cv' %}
+                       bg-gradient-to-r from-indigo-600 to-indigo-500
+                       font-medium
+                   {% else %}
+                       hover:bg-white/10
+                   {% endif %}"
+        >
+
+            <svg
+                class="w-6 h-6 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+            >
+
+                <!-- CV / Document Icon -->
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 3h9l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"
+                />
+
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M14 3v6h6"
+                />
+
+                <!-- Profile -->
+                <circle
+                    cx="10"
+                    cy="13"
+                    r="1.5"
+                />
+
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M7.5 18c.5-2 4.5-2 5 0"
+                />
+
+                <!-- CV Lines -->
+                <path
+                    stroke-linecap="round"
+                    d="M14.5 13h3"
+                />
+
+                <path
+                    stroke-linecap="round"
+                    d="M14.5 16h3"
+                />
+
+            </svg>
+
+            <span>
+                My CV
+            </span>
+
+        </a>
+
+
+       
+<!-- ==============================
+     NEW ANALYSIS
+================================ -->
+
+<a
+    href="{% url 'new_analysis' %}"
+    class="flex items-center gap-4
+           px-4 py-3.5
+           mb-3
+           rounded-xl
+           text-white
+           transition
+           {% if request.resolver_match.url_name == 'new_analysis' %}
+               bg-gradient-to-r from-indigo-600 to-indigo-500
+               font-medium
+           {% else %}
+               hover:bg-white/10
+           {% endif %}"
+>
+
+    <svg
+        class="w-6 h-6 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+    >
+
+        <path
+            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+        />
+
+        <path d="M14 2v6h6" />
+        <path d="M8 13h8" />
+        <path d="M8 17h5" />
+
+    </svg>
+
+    <span>
+        New Analysis
+    </span>
+
+</a>
+
+
+
+<!-- ==============================
+     HISTORY
+================================ -->
+
+<a
+    href="{% url 'history' %}"
+    class="flex items-center gap-4
+           px-4 py-3.5
+           mb-3
+           rounded-xl
+           text-white
+           transition
+           {% if request.resolver_match.url_name == 'history' %}
+               bg-gradient-to-r from-indigo-600 to-indigo-500
+               font-medium
+           {% else %}
+               hover:bg-white/10
+           {% endif %}"
+>
+
+    <svg
+        class="w-6 h-6 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+    >
+
+        <path d="M3 12a9 9 0 1 0 3-6.7" />
+        <path d="M3 4v6h6" />
+        <path d="M12 7v5l3 2" />
+
+    </svg>
+
+    <span>
+        History
+    </span>
+
+</a>
+
+
+
+        <!-- ==============================
+             PROFILE
+        =============================== -->
+
+        <a
+            href="{% url 'profile' %}"
+            class="flex items-center gap-4
+                   px-4 py-3.5
+                   rounded-xl
+                   text-white
+                   transition
+                   {% if request.resolver_match.url_name == 'profile' %}
+                       bg-gradient-to-r from-indigo-600 to-indigo-500
+                       font-medium
+                   {% else %}
+                       hover:bg-white/10
+                   {% endif %}"
+        >
+
+            <svg
+                class="w-6 h-6 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+            >
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="4"
+                />
+
+                <path
+                    d="M4 21c0-4 3.5-7 8-7s8 3 8 7"
+                />
+
+            </svg>
+
+            <span>
+                Profile
+            </span>
+
+        </a>
+
+    </nav>
+
+
+    <!-- ==============================
+         LOGOUT
+    =============================== -->
+
+    <div
+        class="px-4 py-5
+               border-t border-white/10
+               shrink-0"
+    >
+
+        <form
+            method="post"
+            action="{% url 'logout' %}"
+        >
+
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="w-full
+                       flex items-center gap-4
+                       px-4 py-3.5
+                       rounded-xl
+                       text-white
+                       hover:bg-white/10
+                       transition
+                       text-left"
+            >
+
+                <svg
+                    class="w-6 h-6 shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                >
+
+                    <path
+                        d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"
+                    />
+
+                    <path
+                        d="M16 17l5-5-5-5"
+                    />
+
+                    <path
+                        d="M21 12H9"
+                    />
+
+                </svg>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</aside>
+
+
+<!-- ==============================
+     MOBILE TOP BAR
+================================ -->
+
+<div
+    class="lg:hidden
+           fixed top-0 left-0 right-0
+           h-[64px]
+           bg-[#071a33]
+           z-30
+           flex items-center
+           px-4
+           shadow-md"
+>
+
+    <!-- Hamburger -->
+    <button
+        type="button"
+        onclick="toggleSidebar()"
+        class="w-10 h-10
+               flex items-center justify-center
+               rounded-lg
+               text-white
+               hover:bg-white/10
+               transition"
+        aria-label="Open menu"
+    >
+
+        <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+        >
+
+            <path
+                d="M4 6h16M4 12h16M4 18h16"
+            />
+
+        </svg>
+
+    </button>
+
+
+    <!-- Mobile App Name -->
+    <div class="ml-3 leading-tight">
+
+        <p class="text-sm font-bold">
+            AI Job Applicant
+        </p>
+
+        <p class="text-sm font-bold">
+            Assistant
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ==============================
+     SIDEBAR JAVASCRIPT
+================================ -->
+
+<script>
+
+function toggleSidebar() {
+
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+
+    sidebar.classList.toggle("-translate-x-full");
+    overlay.classList.toggle("hidden");
+
+}
+
+</script>

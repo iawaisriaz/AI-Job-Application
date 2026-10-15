@@ -1,0 +1,62 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="AI Job Application Assistant - Analyze your CV, understand job requirements and improve your application."
+    />
+
+    <title>{% block title %} AI Job Application Assistant {% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#4f46e5",
+
+              secondary: "#7c3aed",
+
+              navy: "#071a33",
+
+              "navy-light": "#0b2342",
+            },
+
+            fontFamily: {
+              sans: ["Inter", "Arial", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    {% block extra_css %} {% endblock %}
+  </head>
+
+  <body>
+    <!-- =======  PAGE CONTENT  ======= -->
+
+    {% block content %} {% endblock %}
+
+    <!-- =======  JAVASCRIPT  ======= -->
+
+    {% block extra_js %} {% endblock %}
+  </body>
+</html>

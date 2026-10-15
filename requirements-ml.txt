@@ -1,0 +1,11 @@
+Django
+numpy
+pandas
+scikit-learn
+xgboost
+joblib
+spacy
+sentence-transformers
+pypdf
+python-docx
+matplotlib

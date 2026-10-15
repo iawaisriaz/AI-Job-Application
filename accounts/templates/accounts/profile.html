@@ -1,0 +1,635 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Profile | AI Job Application Assistant
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ====== NAVBAR ======-->
+
+{% include "navbar.html" %}
+
+
+<!-- ====== MAIN PROFILE ====== -->
+
+<main
+    class="lg:ml-[245px]
+           min-h-screen
+           bg-white
+           pt-[64px]
+           lg:pt-0"
+>
+
+    <!-- ====== TOP HEADER ====== -->
+
+    {% include "header.html" %}
+
+
+    <!-- ====== PROFILE CONTENT ====== -->
+
+    <div
+        class="px-4
+               sm:px-6
+               lg:px-8
+               py-6
+               sm:py-8"
+    >
+
+        <!-- PAGE TITLE -->
+
+        <div class="mb-7">
+
+            <h2
+                class="text-2xl
+                       sm:text-3xl
+                       font-bold
+                       text-[#101936]"
+            >
+                Profile
+            </h2>
+
+            <p
+                class="mt-2
+                       text-sm
+                       sm:text-base
+                       text-slate-500"
+            >
+                Manage your personal information and account settings
+            </p>
+
+        </div>
+
+
+        <!-- ==============================
+             MESSAGES
+        =============================== -->
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div
+                    class="mb-5
+                           px-4 py-3
+                           rounded-xl
+                           border
+                           {% if message.tags == 'error' %}
+                               bg-red-50
+                               text-red-700
+                               border-red-200
+                           {% else %}
+                               bg-green-50
+                               text-green-700
+                               border-green-200
+                           {% endif %}"
+                >
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        <!-- ==============================
+             MAIN PROFILE CARD
+        =============================== -->
+
+        <div
+            class="max-w-8xl
+                   bg-white
+                   border border-slate-200
+                   rounded-2xl
+                   shadow-sm
+                   p-5
+                   sm:p-7
+                   lg:p-8"
+        >
+
+
+            <!-- ==========================
+                 PROFILE PICTURE
+            =========================== -->
+
+            <div
+                class="flex
+                       flex-col
+                       sm:flex-row
+                       sm:items-center
+                       gap-5
+                       pb-7
+                       border-b
+                       border-slate-200"
+            >
+
+                <!-- Profile Image -->
+
+                <div
+                    class="w-24 h-24
+                           rounded-full
+                           overflow-hidden
+                           shrink-0
+                           border-4
+                           border-indigo-50"
+                >
+
+                    {% if profile.profile_picture %}
+
+                        <img
+                            src="{{ profile.profile_picture.url }}"
+                            alt="Profile Picture"
+                            class="w-full h-full object-cover"
+                        >
+
+                    {% else %}
+
+                        <div
+                            class="w-full h-full
+                                   bg-indigo-100
+                                   text-indigo-600
+                                   flex items-center
+                                   justify-center
+                                   text-3xl
+                                   font-bold"
+                        >
+
+                            {% if request.user.first_name %}
+
+                                {{ request.user.first_name|first|upper }}
+
+                            {% else %}
+
+                                {{ request.user.username|first|upper }}
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div>
+
+                    <h3
+                        class="text-lg
+                               font-bold
+                               text-[#101936]"
+                    >
+                        Profile Picture
+                    </h3>
+
+                    <p
+                        class="text-sm
+                               text-slate-500
+                               mt-1"
+                    >
+                        Upload a new profile picture from below.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==============================
+                 PERSONAL INFORMATION
+            =============================== -->
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="pt-7"
+            >
+
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    name="action"
+                    value="update_profile"
+                >
+
+
+                <!-- Profile Picture -->
+
+                <div class="mb-6">
+
+                    <label
+                        class="block
+                               text-sm
+                               font-semibold
+                               text-slate-700
+                               mb-2"
+                    >
+                        Change Picture
+                    </label>
+
+                    <input
+                        type="file"
+                        name="profile_picture"
+                        accept="image/*"
+                        class="w-full
+                               rounded-xl
+                               border border-slate-300
+                               px-4 py-3
+                               text-sm
+                               text-slate-600
+                               file:mr-4
+                               file:rounded-lg
+                               file:border-0
+                               file:bg-indigo-50
+                               file:px-4
+                               file:py-2
+                               file:text-indigo-600
+                               file:font-semibold
+                               hover:file:bg-indigo-100"
+                    >
+
+                </div>
+
+
+                <!-- First Name + Last Name -->
+
+                <div
+                    class="grid
+                           grid-cols-1
+                           sm:grid-cols-2
+                           gap-5"
+                >
+
+                    <!-- First Name -->
+
+                    <div>
+
+                        <label
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   text-slate-700
+                                   mb-2"
+                        >
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="first_name"
+                            value="{{ request.user.first_name }}"
+                            placeholder="Enter first name"
+                            class="w-full
+                                   rounded-xl
+                                   border border-slate-300
+                                   px-4 py-3
+                                   text-slate-800
+                                   outline-none
+                                   focus:border-indigo-500
+                                   focus:ring-2
+                                   focus:ring-indigo-100
+                                   transition"
+                        >
+
+                    </div>
+
+
+                    <!-- Last Name -->
+
+                    <div>
+
+                        <label
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   text-slate-700
+                                   mb-2"
+                        >
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="last_name"
+                            value="{{ request.user.last_name }}"
+                            placeholder="Enter last name"
+                            class="w-full
+                                   rounded-xl
+                                   border border-slate-300
+                                   px-4 py-3
+                                   text-slate-800
+                                   outline-none
+                                   focus:border-indigo-500
+                                   focus:ring-2
+                                   focus:ring-indigo-100
+                                   transition"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Gmail -->
+
+                <div class="mt-5">
+
+                    <label
+                        class="block
+                               text-sm
+                               font-semibold
+                               text-slate-700
+                               mb-2"
+                    >
+                        Gmail
+                    </label>
+
+                    <input
+                        type="email"
+                        value="{{ request.user.email }}"
+                        readonly
+                        class="w-full
+                               rounded-xl
+                               border border-slate-200
+                               bg-slate-50
+                               px-4 py-3
+                               text-slate-500
+                               cursor-not-allowed"
+                    >
+
+                    <p
+                        class="text-xs
+                               text-slate-400
+                               mt-2"
+                    >
+                        Your email address cannot be changed.
+                    </p>
+
+                </div>
+
+
+                <!-- Save Button -->
+
+                <div
+                    class="flex
+                           justify-end
+                           mt-6"
+                >
+
+                    <button
+                        type="submit"
+                        class="w-full
+                               sm:w-auto
+                               px-6 py-3
+                               rounded-xl
+                               bg-indigo-600
+                               text-white
+                               font-semibold
+                               hover:bg-indigo-700
+                               transition"
+                    >
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- ==============================
+                 CHANGE PASSWORD
+            =============================== -->
+
+            <div
+                class="mt-9
+                       pt-8
+                       border-t
+                       border-slate-200"
+            >
+
+                <h3
+                    class="text-xl
+                           font-bold
+                           text-[#101936]"
+                >
+                    Change Password
+                </h3>
+
+                <p
+                    class="text-sm
+                           text-slate-500
+                           mt-1
+                           mb-6"
+                >
+                    Update your password to keep your account secure.
+                </p>
+
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="action"
+                        value="change_password"
+                    >
+
+
+                    <!-- Current Password -->
+
+                    <div class="mb-5">
+
+                        <label
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   text-slate-700
+                                   mb-2"
+                        >
+                            Current Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="current_password"
+                            required
+                            placeholder="Enter current password"
+                            class="w-full
+                                   rounded-xl
+                                   border border-slate-300
+                                   px-4 py-3
+                                   outline-none
+                                   focus:border-indigo-500
+                                   focus:ring-2
+                                   focus:ring-indigo-100"
+                        >
+
+                    </div>
+
+
+                    <!-- New Password -->
+
+                    <div class="mb-5">
+
+                        <label
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   text-slate-700
+                                   mb-2"
+                        >
+                            New Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="new_password"
+                            required
+                            placeholder="Enter new password"
+                            class="w-full
+                                   rounded-xl
+                                   border border-slate-300
+                                   px-4 py-3
+                                   outline-none
+                                   focus:border-indigo-500
+                                   focus:ring-2
+                                   focus:ring-indigo-100"
+                        >
+
+                    </div>
+
+
+                    <!-- Confirm Password -->
+
+                    <div>
+
+                        <label
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   text-slate-700
+                                   mb-2"
+                        >
+                            Confirm New Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="confirm_password"
+                            required
+                            placeholder="Confirm new password"
+                            class="w-full
+                                   rounded-xl
+                                   border border-slate-300
+                                   px-4 py-3
+                                   outline-none
+                                   focus:border-indigo-500
+                                   focus:ring-2
+                                   focus:ring-indigo-100"
+                        >
+
+                    </div>
+
+
+                    <!-- Password Button -->
+
+                    <div
+                        class="flex
+                               justify-end
+                               mt-6"
+                    >
+
+                        <button
+                            type="submit"
+                            class="w-full
+                                   sm:w-auto
+                                   px-6 py-3
+                                   rounded-xl
+                                   bg-indigo-600
+                                   text-white
+                                   font-semibold
+                                   hover:bg-indigo-700
+                                   transition"
+                        >
+                            Change Password
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- ==============================
+                 DELETE ACCOUNT
+            =============================== -->
+
+            <div
+                class="mt-10
+                       pt-8
+                       border-t
+                       border-red-200"
+            >
+
+                <h3
+                    class="text-xl
+                           font-bold
+                           text-red-600"
+                >
+                    Delete Account
+                </h3>
+
+                <p
+                    class="text-sm
+                           text-slate-500
+                           mt-2
+                           mb-5"
+                >
+                    Once you delete your account, your account
+                    information will be permanently removed.
+                </p>
+
+
+                <form
+                    method="POST"
+                    onsubmit="return confirm(
+                        'Are you sure you want to delete your account? This action cannot be undone.'
+                    );"
+                >
+
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="action"
+                        value="delete_account"
+                    >
+
+                    <button
+                        type="submit"
+                        class="px-6 py-3
+                               rounded-xl
+                               bg-red-600
+                               text-white
+                               font-semibold
+                               hover:bg-red-700
+                               transition"
+                    >
+                        Delete Account
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}
